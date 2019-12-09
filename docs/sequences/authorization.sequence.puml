@@ -1,0 +1,27 @@
+@startuml Authorization
+
+actor User
+control server
+database user
+
+autonumber
+
+User -> server: Send request
+activate server
+server -> server: Validate access token
+alt invalid
+    server --> User: Send error message with code 401
+else valid
+    server -> user: Verify access token
+    activate user
+    alt invalid
+        user --> server: Error message
+        server --> User: Error message with code 401
+    else valid
+        user --> server: Success message
+        deactivate user
+        server -> server: Call next controller
+    end
+end
+
+@enduml

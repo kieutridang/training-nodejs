@@ -1,0 +1,76 @@
+@startuml Cloth Store ERD
+
+header Cloth Store ERD
+
+entity "Admin" as Admin {
+    *_id <<generated>>
+    --
+    *username : String
+    *password : String
+    *level : Number
+}
+
+entity "Store" as Store {
+    *_id <<generated>>
+    --
+    *address : String
+    *revenue : Number
+}
+
+entity "Client" as Client {
+    *_id <<generated>>
+    --
+    *username : String
+    *password : Sttring
+    name : String
+    deliveryAddress : String
+}
+
+entity "Product" as Product {
+    *_id <<generated>>
+    --
+    *name : String
+    *price : String
+    *imageURL : String
+    *stock : Boolean
+    *status: Boolean
+    description : String
+}
+
+entity "Order" as Order {
+    *_id <<generated>>
+    --
+    *clientId : ObjectId
+    *storeId: ObjectId
+    --
+    *status: String
+    *totalPrice : Number
+    *tax : Number
+    discount : Number
+}
+
+entity "AdminOfStore" as AdminOfStore {
+    *_id <<generated>>
+    --
+    *storeId : ObjectId
+    *adminId : ObjectId
+}
+
+entity "ProductInOrder" as ProductInOrder {
+    *_id <<generated>>
+    --
+    *orderId : ObjectId
+    *productId : ObjectId
+    --
+    *qty : Number
+    price : Number
+}
+
+AdminOfStore --|| Admin
+AdminOfStore --|| Store
+Order --|| Client
+Order --|| Store
+ProductInOrder --|| Order
+ProductInOrder --|| Product
+
+@enduml

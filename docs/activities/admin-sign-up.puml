@@ -1,0 +1,55 @@
+@startuml
+
+start
+
+:Validate email with format;
+if (Email is valid?) then (false)
+    :Return status code 401 and message "Email invalid";
+    stop
+endif
+
+:Validate email in acceptable domain;
+if (Domain is valid?) then (false)
+    :Return status code 401 and message "Email domain not accept";
+    stop
+endif
+
+:Validate email not exist;
+if (Email already exist?) then (true)
+    :Return status code 401 and message "Email already exist";
+    stop
+endif
+
+:Validate password is valid;
+if (Password contain number?) then (false)
+    :Return status code 401 and message "Password must contain number";
+    stop
+endif
+
+if (Password contain uppercase character?) then (false)
+    :Return status code 401 and message "Password must contain uppercase character";
+    stop
+endif
+
+if (Password contain lowercase character?) then (false)
+    :Return status code 401 and message "Password must contain lowercase character";
+    stop
+endif
+
+if (Password have at least 8 characters?) then (false)
+    :Return status code 401 and message "Password must contain at least 8 characters";
+    stop
+endif
+
+:Hash password;
+:Create admin and save to database;
+if (Create fail?) then (true)
+    :Return status code 500 and message "Create account fail";
+    stop
+endif
+
+:Return status 200 and message "Sign up successfully";
+
+end
+
+@enduml

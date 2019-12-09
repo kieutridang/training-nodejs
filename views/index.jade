@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1.text-center My Tasks
+  form(method='POST', action='/add-task')
+    .input-group
+      input.form-control(type='text', placeholder='Enter task to add', name='item')
+      span.input-group-btn
+        input.btn.btn-success(type='submit', value='Add task')
+  form(method='POST', action='/edit-task')
+    .input-group
+      input.form-control(type='text', placeholder='Enter task id to edit', name='id')
+      span.input-group-btn
+        input.btn.btn-success(type='submit', value='Search')

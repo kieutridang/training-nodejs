@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"clothstoredb.admins"}],"uuid":"4b592ec07c2b4ee38102c26564e9715c"}

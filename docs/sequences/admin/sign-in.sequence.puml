@@ -1,0 +1,25 @@
+@startuml Sign-in
+
+actor User
+control server
+database user
+
+autonumber
+
+User -> server: POST /sign-in with body: email and password
+activate server
+server -> user: Check if email and password is valid
+activate user
+alt fail
+    user --> server: Error message
+    server --> User: Error message
+else success
+    user --> server: Success message
+    server -> server: Create access token as jwt
+    server -> user: Store access token
+    user --> server: Store complete
+    deactivate user
+    server --> User: Access token and success message
+    deactivate server
+end
+@enduml

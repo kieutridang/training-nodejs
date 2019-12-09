@@ -1,0 +1,138 @@
+@base_url = http://localhost:3000/api
+@accessToken = {{login_pass.response.body.accessToken}}
+@firstProductId = {{get_all_products.response.body.products[0]._id}}
+@secondProductId = {{get_all_products.response.body.products[1]._id}}
+
+################################################# BASE
+GET {{base_url}}/
+
+###
+GET {{base_url}}/admin/test
+
+###
+POST {{base_url}}/admin/sign-up
+Content-Type: application/json
+
+{
+    "email": "126hh93@gmail.com",
+    "password": "asdfasdf"
+}
+
+################################################# LOG IN
+###
+# @name login_pass
+GET {{base_url}}/admin/log-in
+Content-Type: application/json
+
+{
+    "email": "126hh93@gmail.com",
+    "password": "asdfasdf"
+}
+
+# @name login_fail
+GET {{base_url}}/admin/log-in
+Content-Type: application/json
+
+{
+    "email": "12345@gmail.com",
+    "password": "1111"
+}
+
+################################################# PRODUCT
+###
+# @name add_product
+POST {{base_url}}/product/add-product
+Content-Type: application/json
+accessToken: {{accessToken}}
+
+{
+    "name": "new product 1234567",
+    "price": "1112",
+    "imageURL": "google.com",
+    "stock": true
+}
+
+###
+# @name get_all_products
+GET {{base_url}}/product/get-all
+accessToken: {{accessToken}}
+
+###
+# @name get_product_by_id
+GET {{base_url}}/product/get-product-by-id?id=5de0dc1a0a53bf81e02e2d88
+accessToken: {{accessToken}}
+
+###
+# @name update_product_by_id
+PATCH {{base_url}}/product/update-product?id=5de0dc1a0a53bf81e02e2d88
+Content-Type: application/json
+accessToken: {{accessToken}}
+
+{
+    "name": "New Name",
+    "price": "1",
+    "imageURL": "google.com.vn",
+    "stock": false
+}
+
+###
+# @name delete_product_by_id
+PATCH {{base_url}}/product/delete-product?id=5de0dc1a0a53bf81e02e2d88
+accessToken: {{accessToken}}
+
+################################################# ORDER
+###
+# @name add_order
+POST {{base_url}}/order/add-order
+Content-Type: application/json
+accessToken: {{accessToken}}
+
+{
+    "clientId": "5de0dc1a0a53bf81e02e2d88",
+    "storeId": "5de0dc1a0a53bf81e02e2d88",
+    "status": "Saved",
+    "totalPrice": 1234,
+    "tax": 111,
+    "discount": 0,
+    "productInOrder": [
+        {   "productId": "{{firstProductId}}",
+            "qty": 2,
+            "price": 111},
+        {   "productId": "{{secondProductId}}",
+            "qty": 5,
+            "price": 1112}
+    ]
+}
+
+###
+# @name get_order_by_id
+GET {{base_url}}/order/get-order-by-id?id=5de0f26c1720d6028768ac42
+accessToken: {{accessToken}}
+
+###
+# @name update_order
+PUT {{base_url}}/order/update-order?id=5de3dd0742302f343f763352
+Content-Type: application/json
+accessToken: {{accessToken}}
+
+{
+    "clientId": "5de0dc1a0a53bf81e02e2d88",
+    "storeId": "5de0dc1a0a53bf81e02e2d88",
+    "status": "Ordered",
+    "totalPrice": 6789,
+    "tax": 100,
+    "discount": 20,
+    "productInOrder": [
+        {   "productId": "{{firstProductId}}",
+            "qty": 10,
+            "price": 100},
+        {   "productId": "{{secondProductId}}",
+            "qty": 50,
+            "price": 999}
+    ]
+}
+
+###
+# @name delete_order
+PATCH {{base_url}}/order/delete-order?id=5de0f26c1720d6028768ac42
+accessToken: {{accessToken}}

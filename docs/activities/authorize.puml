@@ -1,0 +1,21 @@
+@startuml
+
+start
+
+:Validate access token;
+if (Request contain access token?) then (false)
+    :Return status code 401 and message "Access Token invalid";
+    stop
+endif
+
+:Verify access token;
+if (Access token exist in database?) then (false)
+    :Return status code 401 and message "Access Token invalid";
+    stop
+else (true)
+    :Return status code 200 and message "Request success";
+endif
+
+end
+
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+
+actor User
+control server
+database order
+database productInOrder
+
+User -> server: POST /add-order with clientId,storeId,total,tax,products
+activate server
+server -> server: Authorize user can add new order
+alt Unauthorize
+    server --> User: Return error code 401 and message: User authorize
+else Authorize
+    server -> order: Insert new order
+    activate order
+    alt Insert fail
+        order --> server: Return error message
+        server --> User: Error message
+    else Insert successfully
+        order --> server: Return success message
+        deactivate order
+        server --> User: Success message
+    end
+
+    server -> productInOrder: Insert new product in order
+    activate productInOrder
+    alt Insert fail
+        productInOrder --> server: Return error message
+        server --> User: Error message
+    else Insert successfully
+        productInOrder --> server: Return success message
+        deactivate productInOrder
+        server --> User: Success message
+        deactivate server
+    end
+
+end
+@enduml
