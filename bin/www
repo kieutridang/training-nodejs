@@ -13,7 +13,7 @@ var mongoose = require('mongoose');
  * Connect to mongodb server
  */
 
-mongoose.connect('mongodb+srv://admin:Ngocanh93@trainingnodejsdb-hb5zq.mongodb.net/clothstoredb?retryWrites=true&w=majority');
+mongoose.connect('http://localhost:27017');
 
 /**
  * Get port from environment and store in Express.
