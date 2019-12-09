@@ -14,7 +14,7 @@ POST {{base_url}}/admin/sign-up
 Content-Type: application/json
 
 {
-    "email": "12h@gmail.com",
+    "email": "123h@gmail.com",
     "password": "asdfasdf"
 }
 
@@ -25,17 +25,8 @@ GET {{base_url}}/admin/log-in
 Content-Type: application/json
 
 {
-    "email": "12h@gmail.com",
+    "email": "123h@gmail.com",
     "password": "asdfasdf"
-}
-
-# @name login_fail
-GET {{base_url}}/admin/log-in
-Content-Type: application/json
-
-{
-    "email": "12345@gmail.com",
-    "password": "1111"
 }
 
 ################################################# PRODUCT
