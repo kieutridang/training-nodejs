@@ -13,7 +13,7 @@ var mongoose = require('mongoose');
  * Connect to mongodb server
  */
 
-mongoose.connect('http://localhost:27017');
+mongoose.connect('mongodb://localhost:27017');
 
 /**
  * Get port from environment and store in Express.
