@@ -1,0 +1,20 @@
+image: node:10
+
+before_script:
+  - docker info
+#   - npm -v
+#   - npm install
+
+# test:
+#   stage: test
+#   only:
+#     - master
+#   script:
+#     - npm test
+
+build:
+  stage: build
+  only:
+    - master
+  script:
+    - docker-compose up --build
